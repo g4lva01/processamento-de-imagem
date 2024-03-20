@@ -6,7 +6,7 @@ function updateRangeValue(value) {
 function mostrarBarraDeRange() {
     var range = document.getElementById('range');
     range.style.display = 'inline-block';
-  }
+}
 
 function transformarImagem2D(img, tamanhoPixel) {
     const canvas = document.createElement('canvas');
