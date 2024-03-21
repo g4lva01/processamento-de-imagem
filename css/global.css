@@ -24,6 +24,20 @@
     max-height: 100%;
 }
 
+.ball {
+    border-radius: 50%;
+    animation: rotate 2s linear infinite;
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
 .buttons{
     display: flex;
     flex-direction: column;
