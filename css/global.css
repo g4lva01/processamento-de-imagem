@@ -1,80 +1,82 @@
-*{
-    background-color: black;
-    color: aliceblue;
+/* Define estilos para todos os elementos HTML */
+* {
+    background-color: black; /* Define a cor de fundo para todos os elementos */
+    color: aliceblue; /* Define a cor do texto para todos os elementos */
 }
-
-.content{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+/* Define estilos para elementos com a classe "content" */
+.content {
+    display: flex; /* Define o modelo de layout como flexível */
+    flex-direction: column; /* Define a direção dos itens como coluna */
+    justify-content: center; /* Alinha os itens verticalmente ao centro */
+    align-items: center; /* Alinha os itens horizontalmente ao centro */
 }
-
-.content > h1{
-    margin-bottom: 30px;
+/* Define estilos para o elemento <h1> que é filho de um elemento com a classe "content" */
+.content > h1 {
+    margin-bottom: 30px; /* Adiciona margem inferior ao elemento <h1> */
 }
-
+/* Define estilos para o elemento com o id "preview" */
 #preview {
-    max-width: 300px;
-    margin-top: 20px;
+    max-width: 300px; /* Define a largura máxima do elemento como 300 pixels */
+    margin-top: 20px; /* Adiciona margem superior */
+    margin-left: 20px; /* Adiciona margem esquerda */
 }
-
+/* Define estilos para as imagens dentro do elemento com o id "preview" */
 #preview > img {
-    max-width: 100%;
-    max-height: 100%;
+    max-width: 100%; /* Define a largura máxima da imagem como 100% */
+    max-height: 100%; /* Define a altura máxima da imagem como 100% */
 }
-
+/* Define estilos para o elemento com a classe "ball" */
 .ball {
-    border-radius: 50%;
-    animation: rotate 2s linear infinite;
+    border-radius: 50%; /* Define o raio da borda para criar uma forma de círculo */
+    animation: rotate 2s linear infinite; /* Aplica uma animação chamada "rotate" */
 }
-
+/* Define uma animação chamada "rotate" */
 @keyframes rotate {
     from {
-        transform: rotate(0deg);
+        transform: rotate(0deg); /* Define a rotação inicial como 0 graus */
     }
     to {
-        transform: rotate(360deg);
+        transform: rotate(360deg); /* Define a rotação final como 360 graus */
     }
 }
-
-.buttons{
-    display: flex;
-    flex-direction: column;
+/* Define estilos para elementos com a classe "buttons" */
+.buttons {
+    display: flex; /* Define o modelo de layout como flexível */
+    flex-wrap: wrap; /* Permite que os itens sejam envolvidos para a próxima linha quando não houver espaço */
+    justify-content: center; /* Alinha os itens horizontalmente ao centro */
+    margin-top: 20px; /* Adiciona margem superior */
 }
-
-.buttons > button{
-    position: relative;
-    display: inline-block;
-    margin: 15px;
-    padding: 15px 30px;
-    text-align: center;
-    font-size: 18px;
-    letter-spacing: 1px;
-    text-decoration: none;
-    color: #725ac1;
-    background: transparent;
-    cursor: pointer;
-    transition: case-out 0.5s;
-    border: 2px solid #725ac1;
-    border-radius: 10px;
-    box-shadow: inset 0 0 0 0 #725ac1;
+/* Define estilos para os botões dentro do elemento com a classe "buttons" */
+.buttons > button {
+    position: relative; /* Define a posição do elemento como relativa */
+    display: inline-block; /* Define o elemento como um bloco que segue o fluxo normal do documento */
+    margin: 5px; /* Adiciona margem ao redor do botão */
+    padding: 15px; /* Adiciona preenchimento dentro do botão */
+    font-size: 18px; /* Define o tamanho da fonte */
+    letter-spacing: 1px; /* Define o espaçamento entre as letras */
+    color: #725ac1; /* Define a cor do texto */
+    background: transparent; /* Define o fundo do botão como transparente */
+    cursor: pointer; /* Altera o cursor para indicar que o botão é clicável */
+    transition: case-out 0.5s; /* Define a transição de mudança de caso */
+    border: 2px solid #725ac1; /* Adiciona uma borda sólida ao redor do botão */
+    border-radius: 10px; /* Define o raio da borda para arredondar os cantos */
+    box-shadow: inset 0 0 0 0 #725ac1; /* Adiciona uma sombra à borda do botão */
 }
-
+/* Define estilos para os botões quando o mouse está sobre eles */
 .buttons > button:hover {
-    color: white;
-    box-shadow: inset 0 -100px 0 0 #725ac1;
+    color: white; /* Define a cor do texto como branca */
+    box-shadow: inset 0 -100px 0 0 #725ac1; /* Altera a sombra para criar um efeito de preenchimento invertido */
 }
-
+/* Define estilos para os botões quando estão sendo clicados */
 .buttons > button:active {
-    transform: scale(0.9);
+    transform: scale(0.9); /* Reduz ligeiramente o tamanho do botão quando clicado */
 }
-
+/* Define estilos para elementos com a classe "tremendo" */
 .tremendo {
-    animation: tremor 0.1s infinite alternate;
+    animation: tremor 0.1s infinite alternate; /* Aplica uma animação chamada "tremor" */
 }
-
+/* Define uma animação chamada "tremor" */
 @keyframes tremor {
-    0% { transform: rotate(-2deg); }
-    100% { transform: rotate(2deg); }
+    0% { transform: rotate(-2deg); } /* Define a rotação inicial como -2 graus */
+    100% { transform: rotate(2deg); } /* Define a rotação final como 2 graus */
 }
