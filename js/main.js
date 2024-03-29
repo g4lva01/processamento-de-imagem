@@ -17,7 +17,7 @@ function previewImage() {
         imagemCarregada = document.createElement('img');
         imagemCarregada.src = URL.createObjectURL(files[0]);
         // Define o tamanho máximo da imagem para preencher a área de visualização.
-        imagemCarregada.style.maxWidth = '100%';
+        imagemCarregada.style.maxWidth = '300px';
         imagemCarregada.style.maxHeight = '100%';
         // Adiciona a imagem à área de visualização.
         preview.appendChild(imagemCarregada);

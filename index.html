@@ -13,13 +13,13 @@
             <form action="/upload" method="post" enctype="multipart/form-data">
                 <input type="file" id="imagem" name="imagem" accept="image/*" onchange="previewImage()">
             </form>
-            <div id="preview"></div>        
+            <div id="preview" class="ball-container"></div>        
             <div class="buttons">
                 <input type="range" id="range" name="range" min="5" max="100" step="5" value="5" oninput="updateRangeValue(this.value)" style="display: none;">
                 <button id="pixelizar-button" type="button" onclick="toggleRange()">Pixelizar</button>
                 <button type="button" onclick="visualizarPixels()">Matriz</button>
-                <button type="button" onclick="processarImagemNegativa()">Imagem Negativa</button>
-                <button type="button" onclick="flipImagem()">Flip</button>
+                <button type="button" onclick="processarImagemNegativa()">Negativa</button>
+                <button type="button" onclick="flipImagem()">Refleti</button>
                 <button type="button" onclick="tremularImagem()">Tremulação</button>
                 <button type="button" onclick="locomoverImagem()">Locomoção</button>
                 <button type="button" id="start-animation">Rotação</button>

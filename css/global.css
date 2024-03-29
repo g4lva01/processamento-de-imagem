@@ -16,14 +16,19 @@
 }
 /* Define estilos para o elemento com o id "preview" */
 #preview {
-    max-width: 300px; /* Define a largura máxima do elemento como 300 pixels */
+    display: flex;
+    justify-content: center;
     margin-top: 20px; /* Adiciona margem superior */
-    margin-left: 20px; /* Adiciona margem esquerda */
 }
-/* Define estilos para as imagens dentro do elemento com o id "preview" */
+/* Define um estilo para imagens dentro do elemento com o id "preview" */
 #preview > img {
-    max-width: 100%; /* Define a largura máxima da imagem como 100% */
-    max-height: 100%; /* Define a altura máxima da imagem como 100% */
+    max-width: 300px; /* Define a largura máxima da imagem como 300 pixels */
+    max-height: 100%; /* Define a altura máxima da imagem como 100% do tamanho do contêiner pai */
+}
+/* Define um estilo para o contêiner das bolas */
+.ball-container {
+    width: 300px; /* Define a largura máxima do contêiner de bolas como 300 pixels */
+    margin: 0 auto; /* Centraliza o contêiner horizontalmente dentro de seu contêiner pai */
 }
 /* Define estilos para o elemento com a classe "ball" */
 .ball {
@@ -44,16 +49,16 @@
     display: flex; /* Define o modelo de layout como flexível */
     flex-wrap: wrap; /* Permite que os itens sejam envolvidos para a próxima linha quando não houver espaço */
     justify-content: center; /* Alinha os itens horizontalmente ao centro */
-    margin-top: 20px; /* Adiciona margem superior */
+    margin-top: 15px; /* Adiciona margem superior */
 }
 /* Define estilos para os botões dentro do elemento com a classe "buttons" */
 .buttons > button {
     position: relative; /* Define a posição do elemento como relativa */
     display: inline-block; /* Define o elemento como um bloco que segue o fluxo normal do documento */
-    margin: 5px; /* Adiciona margem ao redor do botão */
+    margin: 10px; /* Adiciona margem ao redor do botão */
     padding: 15px; /* Adiciona preenchimento dentro do botão */
-    font-size: 18px; /* Define o tamanho da fonte */
-    letter-spacing: 1px; /* Define o espaçamento entre as letras */
+    font-size: 20px; /* Define o tamanho da fonte */
+    letter-spacing: 2px; /* Define o espaçamento entre as letras */
     color: #725ac1; /* Define a cor do texto */
     background: transparent; /* Define o fundo do botão como transparente */
     cursor: pointer; /* Altera o cursor para indicar que o botão é clicável */
