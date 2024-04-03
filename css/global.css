@@ -14,6 +14,10 @@
 .content > h1 {
     margin-bottom: 30px; /* Adiciona margem inferior ao elemento <h1> */
 }
+.figure {
+    display: flex;
+    justify-content: center;
+}
 /* Define estilos para o elemento com o id "preview" */
 #preview {
     display: flex;

@@ -10,9 +10,11 @@
     <section class="content">
         <h1>Processamento de Imagem</h1>
         <div>
-            <form action="/upload" method="post" enctype="multipart/form-data">
+            <div class="figure">
+                <form action="/upload" method="post" enctype="multipart/form-data">
                 <input type="file" id="imagem" name="imagem" accept="image/*" onchange="previewImage()">
             </form>
+            </div>
             <div id="preview" class="ball-container"></div>        
             <div class="buttons">
                 <input type="range" id="range" name="range" min="5" max="100" step="5" value="5" oninput="updateRangeValue(this.value)" style="display: none;">
