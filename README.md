@@ -4,4 +4,5 @@ Foi utilizado as liguagem HTML, CSS e JavaScript, para está produzindo as funç
 link para está vendo o projeto:
 https://processamento-de-imagem.netlify.app/
 
+
 ![QRcode](QRcode.jpeg)
