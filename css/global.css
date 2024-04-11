@@ -31,14 +31,13 @@
     max-width: 300px; /* Define a largura máxima da imagem como 300 pixels */
     max-height: 100%; /* Define a altura máxima da imagem como 100% do tamanho do contêiner pai */
 }
-/* Define um estilo para o contêiner das bolas */
-.ball-container {
-    width: 300px; /* Define a largura máxima do contêiner de bolas como 300 pixels */
+/* Define um estilo para o contêiner*/
+.rotation-container {
+    width: 300px; /* Define a largura máxima do contêiner como 300 pixels */
     margin: 0 auto; /* Centraliza o contêiner horizontalmente dentro de seu contêiner pai */
 }
-/* Define estilos para o elemento com a classe "ball" */
-.ball {
-    border-radius: 50%; /* Define o raio da borda para criar uma forma de círculo */
+/* Define estilos para o elemento com a classe "rotation" */
+.rotation {
     animation: rotate 2s linear infinite; /* Aplica uma animação chamada "rotate" */
 }
 /* Define uma animação chamada "rotate" */
