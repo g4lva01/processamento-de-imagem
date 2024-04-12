@@ -1,5 +1,5 @@
-// Função que recebe uma imagem e a vira horizontalmente
-function flipImagemHorizontal(img) {
+// Função que recebe uma imagem e a vira verticalmente
+function flipImagemVertical(img) {
     // Cria um novo elemento canvas
     const canvas = document.createElement('canvas');
     // Obtém o contexto 2D do canvas
@@ -9,7 +9,7 @@ function flipImagemHorizontal(img) {
     canvas.height = img.height;
     // Translada o contexto para a largura do canvas
     ctx.translate(canvas.width, 0);
-    // Inverte a escala horizontalmente
+    // Inverte a escala verticalmente
     ctx.scale(-1, 1);
     // Desenha a imagem no contexto 2D do canvas
     ctx.drawImage(img, 0, 0, img.width, img.height);
@@ -32,8 +32,8 @@ function flipImagem() {
         alert('Imagem não encontrada dentro do elemento de pré-visualização.');
         return;
     }
-    // Chama a função flipImagemHorizontal para virar a imagem horizontalmente
-    const imagemFlip = flipImagemHorizontal(imgElement);
+    // Chama a função flipImagemVertical para virar a imagem verticalmente
+    const imagemFlip = flipImagemVertical(imgElement);
     // Limpa o conteúdo do elemento de pré-visualização
     previewDiv.innerHTML = '';
     // Adiciona a imagem virada ao elemento de pré-visualização
