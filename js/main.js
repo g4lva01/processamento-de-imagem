@@ -36,6 +36,8 @@ function visualizarPixels() {
     outputArea.style.fontFamily = 'monospace';
     preview.innerHTML = '';
     preview.appendChild(outputArea);
+    // Cria um objeto para armazenar a contagem de ocorrências de cada valor de cor RGB.
+    var colorCount = {};
     // Verifica se uma imagem foi carregada.
     if (imagemCarregada) {
         var img = imagemCarregada;
@@ -49,37 +51,42 @@ function visualizarPixels() {
         ctx.drawImage(img, 0, 0, img.width, img.height);
         // Obtém os dados de imagem do canvas.
         var pixels = ctx.getImageData(0, 0, img.width, img.height).data;
-        // Define o número de pixels a serem renderizados por frame.
-        var pixelsPerFrame = 100;
-        var currentPixelIndex = 0;
-        // Função para renderizar os pixels de forma assíncrona.
-        var renderPixels = function() {
-            var startTime = performance.now();
-            // Itera sobre os pixels.
-            for (var i = 0; i < pixelsPerFrame && currentPixelIndex < pixels.length; i++) {
-                var pixelIndex = currentPixelIndex;
-                currentPixelIndex += 4;
-                // Calcula as coordenadas (x, y) do pixel.
-                var y = Math.floor(pixelIndex / (img.width * 4));
-                var x = Math.floor((pixelIndex / 4) % img.width);
-                // Obtém os valores RGB do pixel.
-                var valorRGB = Array.from(pixels.slice(pixelIndex, pixelIndex + 3));
-                // Cria um elemento <div> para exibir as informações do pixel e o adiciona à área de visualização.
-                var linhaTexto = document.createElement('div');
-                linhaTexto.textContent = `(${x},${y}): RGB(${valorRGB.join(', ')})`;
-                outputArea.appendChild(linhaTexto);
-            }
-            // Continua renderizando os pixels se ainda houver pixels a serem processados.
-            if (currentPixelIndex < pixels.length) {
-                requestAnimationFrame(renderPixels);
+        // Itera sobre os pixels para contar as ocorrências de cada valor de cor RGB.
+        for (var i = 0; i < pixels.length; i += 4) {
+            var r = pixels[i];
+            var g = pixels[i + 1];
+            var b = pixels[i + 2];
+            var rgb = `${r},${g},${b}`;
+            // Incrementa a contagem para esta cor RGB.
+            if (rgb in colorCount) {
+                colorCount[rgb]++;
             } else {
-                // Exibe o tempo de execução no console quando todos os pixels forem processados.
-                var endTime = performance.now();
-                console.log('Tempo de execução: ' + (endTime - startTime) + ' ms');
+                colorCount[rgb] = 1;
             }
-        };
-        // Inicia o processo de renderização dos pixels.
-        renderPixels();
+        }
+        // Exibe as três cores mais utilizadas no canto superior direito da área de visualização.
+        var sortedColors = Object.keys(colorCount).sort(function(a, b) {
+            return colorCount[b] - colorCount[a];
+        });
+        for (var j = 0; j < Math.min(3, sortedColors.length); j++) {
+            var colorInfo = sortedColors[j].split(',');
+            var colorBox = document.createElement('div');
+            colorBox.style.width = '20px';
+            colorBox.style.height = '20px';
+            colorBox.style.backgroundColor = `rgb(${colorInfo[0]},${colorInfo[1]},${colorInfo[2]})`;
+            colorBox.style.display = 'inline-block';
+            var linhaTexto = document.createElement('span');
+            linhaTexto.textContent = ` RGB(${colorInfo[0]},${colorInfo[1]},${colorInfo[2]}): ${colorCount[sortedColors[j]]} vezes`;
+            outputArea.appendChild(colorBox);
+            outputArea.appendChild(linhaTexto);
+            outputArea.appendChild(document.createElement('br'));
+        }
+        // Exibe as ocorrências de cada cor RGB na área de visualização.
+        for (var color in colorCount) {
+            var linhaTexto = document.createElement('div');
+            linhaTexto.textContent = `RGB(${color}): ${colorCount[color]} vezes`;
+            outputArea.appendChild(linhaTexto);
+        }
     } else {
         // Se nenhuma imagem foi carregada, exibe um alerta.
         alert('Por favor, selecione uma imagem antes de visualizar os pixels.');

@@ -24,12 +24,16 @@
 #preview {
     display: flex;
     justify-content: center;
+    align-items: center; /* Alinha verticalmente a imagem */
     margin-top: 20px; /* Adiciona margem superior */
+    width: 100%; /* Define a largura máxima do contêiner */
+    height: 300px; /* Define a altura máxima do contêiner */
+    overflow: hidden; /* Garante que a imagem redimensionada não se expanda além do contêiner */
 }
-/* Define um estilo para imagens dentro do elemento com o id "preview" */
+/* Define estilos para a imagem dentro do elemento com o id "preview" */
 #preview > img {
-    max-width: 300px; /* Define a largura máxima da imagem como 300 pixels */
-    max-height: 100%; /* Define a altura máxima da imagem como 100% do tamanho do contêiner pai */
+    max-width: 100%; /* Define a largura máxima da imagem como 100% do contêiner */
+    max-height: 100%; /* Define a altura máxima da imagem como 100% do contêiner */
 }
 /* Define um estilo para o contêiner*/
 .rotation-container {
