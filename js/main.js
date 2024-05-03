@@ -51,6 +51,35 @@ function visualizarPixels() {
         ctx.drawImage(img, 0, 0, img.width, img.height);
         // Obtém os dados de imagem do canvas.
         var pixels = ctx.getImageData(0, 0, img.width, img.height).data;
+        // Define o número de pixels a serem renderizados por frame.
+        var pixelsPerFrame = 100;
+        var currentPixelIndex = 0;
+        // Função para renderizar os pixels de forma assíncrona.
+        var renderPixels = function() {
+            var startTime = performance.now();
+            // Itera sobre os pixels.
+            for (var i = 0; i < pixelsPerFrame && currentPixelIndex < pixels.length; i++) {
+                var pixelIndex = currentPixelIndex;
+                currentPixelIndex += 4;
+                // Calcula as coordenadas (x, y) do pixel.
+                var y = Math.floor(pixelIndex / (img.width * 4));
+                var x = Math.floor((pixelIndex / 4) % img.width);
+                // Obtém os valores RGB do pixel.
+                var valorRGB = Array.from(pixels.slice(pixelIndex, pixelIndex + 3));
+                // Cria um elemento <div> para exibir as informações do pixel e o adiciona à área de visualização.
+                var linhaTexto = document.createElement('div');
+                linhaTexto.textContent = `(${x},${y}): RGB(${valorRGB.join(', ')})`;
+                outputArea.appendChild(linhaTexto);
+            }
+            // Continua renderizando os pixels se ainda houver pixels a serem processados.
+            if (currentPixelIndex < pixels.length) {
+                requestAnimationFrame(renderPixels);
+            } else {
+                // Exibe o tempo de execução no console quando todos os pixels forem processados.
+                var endTime = performance.now();
+                console.log('Tempo de execução: ' + (endTime - startTime) + ' ms');
+            }
+        }
         // Itera sobre os pixels para contar as ocorrências de cada valor de cor RGB.
         for (var i = 0; i < pixels.length; i += 4) {
             var r = pixels[i];
@@ -68,6 +97,9 @@ function visualizarPixels() {
         var sortedColors = Object.keys(colorCount).sort(function(a, b) {
             return colorCount[b] - colorCount[a];
         });
+        var topColorsContainer = document.createElement('div');
+        topColorsContainer.style.display = 'flex'; // Define um layout flexível para os elementos
+        topColorsContainer.style.alignItems = 'center'; // Centraliza os elementos verticalmente
         for (var j = 0; j < Math.min(3, sortedColors.length); j++) {
             var colorInfo = sortedColors[j].split(',');
             var colorBox = document.createElement('div');
@@ -77,16 +109,17 @@ function visualizarPixels() {
             colorBox.style.display = 'inline-block';
             var linhaTexto = document.createElement('span');
             linhaTexto.textContent = ` RGB(${colorInfo[0]},${colorInfo[1]},${colorInfo[2]}): ${colorCount[sortedColors[j]]} vezes`;
-            outputArea.appendChild(colorBox);
-            outputArea.appendChild(linhaTexto);
-            outputArea.appendChild(document.createElement('br'));
+            var colorContainer = document.createElement('div');
+            colorContainer.style.marginRight = '10px'; // Espaço entre as cores
+            colorContainer.appendChild(colorBox);
+            colorContainer.appendChild(linhaTexto);
+            topColorsContainer.appendChild(colorContainer);
         }
-        // Exibe as ocorrências de cada cor RGB na área de visualização.
-        for (var color in colorCount) {
-            var linhaTexto = document.createElement('div');
-            linhaTexto.textContent = `RGB(${color}): ${colorCount[color]} vezes`;
-            outputArea.appendChild(linhaTexto);
-        }
+        outputArea.appendChild(topColorsContainer);
+        // Adiciona uma linha separadora
+        var linhaSeparadora = document.createElement('hr');
+        outputArea.appendChild(linhaSeparadora);
+        renderPixels();
     } else {
         // Se nenhuma imagem foi carregada, exibe um alerta.
         alert('Por favor, selecione uma imagem antes de visualizar os pixels.');
