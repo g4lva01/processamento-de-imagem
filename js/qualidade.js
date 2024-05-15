@@ -17,7 +17,12 @@ function toggleQuality() {
         qualityRange.style.display = 'none';
     }
 }
-function ajustarQualidadeImagem(qualidade) {
+
+// Variável para armazenar a URL da imagem original
+var originalImageSrc = '';
+
+// Função para aplicar o efeito de desfoque na imagem
+function aplicarDesfoqueImagem(blurValue = 5) {
     var preview = document.getElementById('preview');
     var imagem = preview.querySelector('img');
 
@@ -32,52 +37,18 @@ function ajustarQualidadeImagem(qualidade) {
             var canvas = document.createElement('canvas');
             var context = canvas.getContext('2d');
 
-            // Definir a resolução com base na qualidade escolhida
-            var novaLargura = imagem.width;
-            var novaAltura = imagem.height;
+            // Definir as dimensões do canvas com base na imagem original
+            canvas.width = imagem.width;
+            canvas.height = imagem.height;
 
-            switch (qualidade) {
-                case '240':
-                    novaLargura = imagem.width * 426 / imagem.height;
-                    novaAltura = 240;
-                    break;
-                case '360':
-                    novaLargura = imagem.width * 640 / imagem.height;
-                    novaAltura = 360;
-                    break;
-                case '480':
-                    novaLargura = imagem.width * 854 / imagem.height;
-                    novaAltura = 480;
-                    break;
-                case '720':
-                    novaLargura = imagem.width * 1280 / imagem.height;
-                    novaAltura = 720;
-                    break;
-                case '1080':
-                    novaLargura = imagem.width * 1920 / imagem.height;
-                    novaAltura = 1080;
-                    break;
-                case '1440':
-                    novaLargura = imagem.width * 2560 / imagem.height;
-                    novaAltura = 1440;
-                    break;
-                case '2160':
-                    novaLargura = imagem.width * 3840 / imagem.height;
-                    novaAltura = 2160;
-                    break;
-                case '4320':
-                    novaLargura = imagem.width * 7680 / imagem.height;
-                    novaAltura = 4320;
-                    break;
-                default:
-                    break;
+            // Aplicar o filtro de desfoque de acordo com o valor do range
+            if (blurValue > 0) {
+                context.filter = `blur(${blurValue}px)`;
+            } else {
+                context.filter = 'none';
             }
 
-            // Definir as dimensões do canvas com base na resolução
-            canvas.width = novaLargura;
-            canvas.height = novaAltura;
-
-            // Desenhar a imagem original no canvas nas coordenadas 0, 0 (sem redimensionar)
+            // Desenhar a imagem original no canvas
             context.drawImage(novaImagem, 0, 0, canvas.width, canvas.height);
 
             // Limpar o preview
@@ -88,6 +59,44 @@ function ajustarQualidadeImagem(qualidade) {
         };
 
         // Definir a origem da nova imagem como a mesma da imagem original
-        novaImagem.src = imagem.src;
+        if (blurValue == 0) {
+            novaImagem.src = originalImageSrc;  // Usar a imagem original armazenada
+        } else {
+            novaImagem.src = imagem.src;
+        }
     }
 }
+
+// Listener para o controle deslizante de desfoque
+document.getElementById('blurRange').addEventListener('input', function() {
+    var blurValue = this.value;
+    aplicarDesfoqueImagem(blurValue);
+});
+
+// Listener para o evento 'change' do input de imagem
+document.getElementById('imagem').addEventListener('change', function(event) {
+    var input = event.target;
+    var preview = document.getElementById('preview');
+    var reader = new FileReader();
+
+    // Remove qualquer conteúdo existente na área de visualização.
+    while (preview.firstChild) {
+        preview.removeChild(preview.firstChild);
+    }
+
+    // Verifica se um arquivo de imagem foi selecionado.
+    var files = input.files;
+    if (files.length > 0) {
+        // Cria um elemento <img> com a URL do arquivo de imagem selecionado.
+        var img = document.createElement('img');
+        img.onload = function() {
+            // Armazena a URL da imagem original
+            originalImageSrc = img.src;
+            // Adiciona a imagem à área de visualização.
+            preview.appendChild(img);
+            // Aplica o desfoque inicial
+            aplicarDesfoqueImagem(document.getElementById('blurRange').value);
+        };
+        reader.readAsDataURL(files[0]);
+    }
+});
