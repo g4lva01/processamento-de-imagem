@@ -23,7 +23,6 @@ function aplicarNegativo(img) {
     novaImagem.src = canvas.toDataURL(); // Converter o canvas para um URL de dados
     return novaImagem;
 }
-
 // Função principal para processar a imagem e aplicar o efeito negativo
 function processarImagemNegativa() {
     // Obter o elemento de input de imagem
@@ -49,8 +48,10 @@ function processarImagemNegativa() {
             // Quando a imagem é carregada
             const img = new Image();
             img.onload = function () {
-                // Aplicar o efeito negativo diretamente à imagem
-                const imagemNegativa = aplicarNegativo(img);
+                // Transformar a imagem 2D (função não definida neste código)
+                // e, em seguida, aplicar o efeito negativo
+                const novaImagem = transformarImagem2D(img, tamanhoPixel);
+                const imagemNegativa = aplicarNegativo(novaImagem);
                 // Exibir a imagem negativa no elemento de pré-visualização
                 const previewDiv = document.getElementById('preview');
                 previewDiv.innerHTML = '';

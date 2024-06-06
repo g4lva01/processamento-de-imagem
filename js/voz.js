@@ -19,7 +19,8 @@ document.addEventListener('DOMContentLoaded', function() {
         "tamanho": toggleSize,
         "restaurar": restaurarImagem,
         "histograma": gerarHistograma,
-        "qualidade": toggleQuality
+        "qualidade": toggleQuality,
+        "ondula": ondularImagem
     };
 
     // Solicitar permissão para acessar o microfone do usuário
