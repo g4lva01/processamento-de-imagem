@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
         "tamanho": toggleSize,
         "restaurar": restaurarImagem,
         "histograma": gerarHistograma,
-        "qualidade": toggleQuality,
+        "borrar": toggleQuality,
         "ondula": ondularImagem
     };
 
